@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -24,22 +26,46 @@ public class ProjectSecurityConfig {
 		return http.build();
 	}
 	
+//	@Bean
+//	public InMemoryUserDetailsManager userDetailsService() {
+//		
+//		UserDetails admin = User.withDefaultPasswordEncoder()
+//				.username("thiago")
+//				.password("123")
+//				.authorities("admin")
+//				.build();
+//	
+//		UserDetails leticia = User.withDefaultPasswordEncoder()
+//				.username("leticia")
+//				.password("linda")
+//				.authorities("read")
+//				.build();
+//	
+//		return new InMemoryUserDetailsManager(admin,leticia);
+//	}
+	
+	
+	//second approach
 	@Bean
 	public InMemoryUserDetailsManager userDetailsService() {
 		
-		UserDetails admin = User.withDefaultPasswordEncoder()
-				.username("thiago")
+		UserDetails admin = User.withUsername("thiago")
 				.password("123")
 				.authorities("admin")
 				.build();
 	
-		UserDetails leticia = User.withDefaultPasswordEncoder()
-				.username("leticia")
+		UserDetails leticia = User.withUsername("leticia")
 				.password("linda")
 				.authorities("read")
 				.build();
 	
 		return new InMemoryUserDetailsManager(admin,leticia);
+	}
+	
+	
+	@Bean
+	public PasswordEncoder passWordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
 	}
 
 }
