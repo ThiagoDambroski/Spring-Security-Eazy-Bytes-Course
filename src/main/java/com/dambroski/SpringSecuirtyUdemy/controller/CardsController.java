@@ -4,12 +4,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class WelcomeController {
+public class CardsController {
 	
-	
-	@GetMapping("/hello")
-	public String helloWorld() {
-		return "Hello World !";
+	@GetMapping("/myCards")
+	public String getCardsDetails() {
+		return "cards daetils";
 	}
 
 }
