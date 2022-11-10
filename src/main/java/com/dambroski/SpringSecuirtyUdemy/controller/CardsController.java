@@ -1,14 +1,28 @@
 package com.dambroski.SpringSecuirtyUdemy.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.dambroski.SpringSecuirtyUdemy.model.Cards;
+import com.dambroski.SpringSecuirtyUdemy.repository.CardsRepository;
 
 @RestController
 public class CardsController {
 	
+	@Autowired
+    private CardsRepository cardsRepository;
+	
 	@GetMapping("/myCards")
-	public String getCardsDetails() {
-		return "cards daetils";
-	}
-
+	 public List<Cards> getCardDetails(@RequestParam int id) {
+        List<Cards> cards = cardsRepository.findByCustomerId(id);
+        if (cards != null ) {
+            return cards;
+        }else {
+            return null;
+        }
+    }
 }

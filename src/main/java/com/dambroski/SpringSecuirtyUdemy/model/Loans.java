@@ -1,46 +1,45 @@
 package com.dambroski.SpringSecuirtyUdemy.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Customer {
-	
+@Table(name = "loans")
+public class Loans {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
 	@GenericGenerator(name = "native",strategy = "native")
+	@Column(name = "loan_number")
+	private int loanNumber;
+	
 	@Column(name = "customer_id")
-	private long id;
+	private int customerId;
 	
-	private String name;
-
-	private String email;
+	@Column(name="start_dt")
+	private Date startDt;
 	
-	@Column(name = "mobile_number")
-	private String mobileNumber;
+	@Column(name = "loan_type")
+	private String loanType;
 	
-	@JsonIgnore
-	private String pwd;
+	@Column(name = "total_loan")
+	private int totalLoan;
 	
-	private String role;
+	@Column(name = "amount_paid")
+	private int amountPaid;
+	
+	@Column(name = "outstanding_amount")
+	private int outstandingAmount;
 	
 	@Column(name = "create_dt")
 	private String createDt;
-	
 
 }
