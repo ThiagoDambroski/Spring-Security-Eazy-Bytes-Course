@@ -21,7 +21,7 @@ public class ProjectSecurityConfig {
 		http
 		.csrf().disable()
 		.authorizeHttpRequests()
-			.antMatchers("/myAccount","myBalance","/myLoans","/myCards").authenticated()
+			.antMatchers("/myAccount","myBalance","/myLoans","/myCards","/user").authenticated()
 			.antMatchers("/notices","/contact","/register").permitAll()
 		.and().httpBasic()
 		.and().formLogin();

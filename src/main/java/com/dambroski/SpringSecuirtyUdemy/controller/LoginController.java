@@ -1,5 +1,7 @@
 package com.dambroski.SpringSecuirtyUdemy.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +34,11 @@ public class LoginController {
 		try {
 			String passwrod = passwordEncoder.encode(customer.getPwd());
 			customer.setPwd(passwrod);
-			customer.setCreateDt(String.valueOf(new Date(System.currentTimeMillis())));
+			Date d = new Date(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-");
+			String date = sdf.format(d);
+			System.out.println(date);
+			customer.setCreateDt(date);
 			savedCustomer = customerRepository.save(customer);
 			if(savedCustomer.getId() > 0) {
 				response = ResponseEntity.status(HttpStatus.CREATED).body("sucess");

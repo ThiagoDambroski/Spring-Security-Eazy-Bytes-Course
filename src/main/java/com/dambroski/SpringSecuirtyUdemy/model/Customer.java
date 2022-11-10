@@ -8,8 +8,6 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +23,7 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
 	@GenericGenerator(name = "native",strategy = "native")
 	@Column(name = "customer_id")
-	private long id;
+	private int id;
 	
 	private String name;
 
@@ -34,7 +32,7 @@ public class Customer {
 	@Column(name = "mobile_number")
 	private String mobileNumber;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	private String pwd;
 	
 	private String role;
