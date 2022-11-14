@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
@@ -37,8 +38,9 @@ public class ProjectSecurityConfig {
 				config.setMaxAge(3600L);
 				return config;
 			}
-		}).and().csrf().disable()
-		.authorizeHttpRequests()
+		}).and().csrf().ignoringAntMatchers("/contact","/register")
+						.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+		.and().authorizeHttpRequests()
 			.antMatchers("/myAccount","myBalance","/myLoans","/myCards","/user").authenticated()
 			.antMatchers("/notices","/contact","/register").permitAll()
 		.and().httpBasic()
