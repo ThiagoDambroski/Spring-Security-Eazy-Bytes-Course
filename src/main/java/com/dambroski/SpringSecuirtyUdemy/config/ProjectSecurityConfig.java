@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import com.dambroski.SpringSecuirtyUdemy.filter.AuthoritiesLoggingAfterFilter;
 import com.dambroski.SpringSecuirtyUdemy.filter.AuthoritiesLoggingAtFilter;
+import com.dambroski.SpringSecuirtyUdemy.filter.JWTTokenGeneratorFilter;
 import com.dambroski.SpringSecuirtyUdemy.filter.RequestValidationBeforeFilter;
 
 @Configuration
@@ -49,6 +50,7 @@ public class ProjectSecurityConfig {
 		.addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
 		.addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
 		.addFilterAfter(new AuthoritiesLoggingAfterFilter(),BasicAuthenticationFilter.class)
+		.addFilterAfter(new JWTTokenGeneratorFilter(),BasicAuthenticationFilter.class)
 		.authorizeHttpRequests()
 			.antMatchers("/myAccount").hasRole("USER")
 			.antMatchers("myBalance").hasAnyRole("USER","ADMIN")
