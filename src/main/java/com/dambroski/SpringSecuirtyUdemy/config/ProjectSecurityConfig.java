@@ -56,7 +56,7 @@ public class ProjectSecurityConfig {
 		.authorizeHttpRequests()
 			.antMatchers("/myAccount").hasRole("USER")
 			.antMatchers("/myBalance").hasAnyRole("USER","ADMIN")
-			.antMatchers("/myLoans").hasRole("USER")
+			.antMatchers("/myLoans").authenticated()
 			.antMatchers("/myCards").hasRole("USER")
 			.antMatchers("/user").authenticated()
 			.antMatchers("/notices","/contact","/register").permitAll()
